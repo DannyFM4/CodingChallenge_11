@@ -29,3 +29,32 @@ console.log(book1.getDetails());
 // uses the method to update the amount of copies and logs the new book details in the console
 book1.updateCopies(-1);
 console.log(book1.getDetails());
+
+
+// Task 2: Creating a Borrower Class
+
+class Borrower { // creates a class named borrower
+    constructor(name, borrowerID) {
+        // defines the parameters
+        this.name = name;
+        this.borrowerID = borrowerID;
+        this.borrowedBooks = [];   
+    };
+
+    borrowBook(book) { // creates a method that will add the book to the empty array of borrowed books
+        this.borrowedBooks.push(book);
+    };
+
+    returnBook(book) { // this will remove the book from the array, encinuating that the bok is returned
+        this.borrowedBooks.pop(book);
+    };
+};
+
+// creates a new borrower, uses the method to borrow a book, then logs the borrowed books in the console
+const borrower1 = new Borrower("Alice Johnson", 201);
+borrower1.borrowBook("The Great Gatsby");
+console.log(borrower1.borrowedBooks);
+
+// uses the method to return the great gatsby book, then logs the updated borrowed books array
+borrower1.returnBook("The Great Gatsby");
+console.log(borrower1.borrowedBooks);
