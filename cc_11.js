@@ -34,10 +34,10 @@ console.log(book1.getDetails());
 // Task 2: Creating a Borrower Class
 
 class Borrower { // creates a class named borrower
-    constructor(name, borrowerID) {
+    constructor(name, borrowerId) {
         // defines the parameters
         this.name = name;
-        this.borrowerID = borrowerID;
+        this.borrowerId = borrowerId;
         this.borrowedBooks = [];   
     };
 
@@ -62,8 +62,9 @@ console.log(borrower1.borrowedBooks);
 
 // Task 3: Creating a Library Class
 
-class Library { // creates a new class called Library
+class Library extends Borrower{ // creates a new class called Library
     constructor() {
+        super();
         this.books = [];
         this.borrowers = [];
     };
@@ -75,9 +76,31 @@ class Library { // creates a new class called Library
     listBooks() { // creates a method that return each books details
         this.books.forEach(book => console.log(book.getDetails()));
     };
+
+    lendBook(borrowerId, isbn) { // task 4 - creates method to lend a book out
+        let book = this.books.find(bk => bk.isbn === isbn); // finds the specific book
+        let borrower = this.borrowers.find(br => br.borrowerId === borrowerId); // finds the specific borrower
+
+        if (!book) { // runs if statement to determine which action to run
+            console.log(`Book was not found with this ISBN`);
+        } if (!borrower) {
+            console.log(`No borrower was found`);
+        } if (book.copies > 0) {
+            book.updateCopies(-1);
+        } else {
+            console.log(`No books were found`);
+        };
+    };
 };
 
 // creates new library, uses method to add a book, the logs the books details in the console
 const library = new Library();
 library.addBook(book1);
 library.listBooks();
+
+
+// Task 4: Implementing Book Borrowing
+
+// uses the lend book method and logs the details in the console
+library.lendBook(201, 123456);
+console.log(book1.getDetails());
